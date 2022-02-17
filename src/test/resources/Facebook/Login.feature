@@ -23,6 +23,14 @@ Feature: Login
     Then I verify user lands on home page
 
 
+    Scenario: Verify login
+      When I enter '%^&&*()' as login email
+    When I enter 'abcd@1234' as login password
+    When I click on login button
+      Then I verify message is displayed
+
+
+
     # Background
     # Scenario-1
     # Background

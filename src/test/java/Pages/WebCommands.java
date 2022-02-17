@@ -10,7 +10,6 @@ import org.openqa.selenium.support.ui.*;
 import java.time.Duration;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Handler;
 
 public class WebCommands {
 
@@ -20,7 +19,7 @@ public class WebCommands {
 
     public WebElement getElementWithScroll(By locator) {
         WebElement element = null;
-        for (int i=1 ; i <= 20 ; i++) {
+        for (int i = 1; i <= 20; i++) {
             try {
                 element = UseDriver.getDriver().findElement(locator);
                 break;
@@ -48,7 +47,17 @@ public class WebCommands {
     }
 
     public List<WebElement> getElements(By locator) {
-        return UseDriver.getDriver().findElements(locator);
+        return UseDriver.getDriver().findElements(locator);}
+
+
+    public void getEnabledElements(By locator, String text) {
+        List<WebElement> enabledElements = getElements(locator);
+        for (WebElement myElememt : enabledElements) {
+            if (!myElememt.isEnabled()) {
+                System.out.println(text);
+                break;
+            }
+        }
     }
 
     public void type(By locator, String data) {
@@ -92,13 +101,13 @@ public class WebCommands {
 
     public void scrollDown(int pixels) {
         JavascriptExecutor js = (JavascriptExecutor) UseDriver.getDriver();     // Casting
-        js.executeScript("scrollBy(0,"+pixels+");");
+        js.executeScript("scrollBy(0," + pixels + ");");
         Misc.sleep(2);
     }
 
     public void scrollUp(int pixels) {
         JavascriptExecutor js = (JavascriptExecutor) UseDriver.getDriver();     // Casting
-        js.executeScript("scrollBy(0,-"+pixels+");");
+        js.executeScript("scrollBy(0,-" + pixels + ");");
         Misc.sleep(2);
     }
 
@@ -175,6 +184,60 @@ public class WebCommands {
         return getElementWithWait(locator).isEnabled();
     }
 
+    public boolean isElementSEnabled(By locator){
+        return getElementWithWait(locator).isEnabled();
+    }
+
+    public boolean isWebElementSelected(By locator) {
+        return getElementWithWait(locator).isSelected();
+    }
+
+    public void enterInformation(By locator, String data) {
+        WebElement elementToType = getElement(locator);
+        elementToType.sendKeys(data);
+
+    }
+
+    public String getInformation(By locator, String date) {
+        WebElement elementToGet = getElement(locator);
+        elementToGet.getText();
+        return date;
+    }
+
+    public boolean compare(String data, String data1) {
+        boolean daycompare = data.equalsIgnoreCase(data1);
+        return daycompare;
+    }
+
+    public void clickDayDropdown(By locator) {
+        clickThis(locator);
+    }
+
+    public void selectDay(By locator, String day) {
+        selectFromDropdown(locator, day);
+    }
+
+    public void clickYearDropDown(By locator) {
+        clickThis(locator);
+    }
+
+    public void selectYear(By locator, String year) {
+        selectFromDropdown(locator, year);
+    }
+
+    public void clickSignUpButton(By locator) {
+        clickThis(locator);
+    }
+    //public String getGenderErrorMessage(){
+    //  return getElement(genderErrorMessageLocator).getText();
+
+
+    public String getTempValue(By locator){
+        WebElement elementGet = getElement(locator);
+        elementGet.getText();
+
+        return null;
+    }
 
 
 }

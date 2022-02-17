@@ -44,5 +44,10 @@ public class DateUtil {
 
         return isDateFormatCorrect;
     }
+    public static String getDateInFormat(String format) {
+        Date date = new Date();
+        SimpleDateFormat df = new SimpleDateFormat(format);
+        return df.format(date);
+    }
 
 }
